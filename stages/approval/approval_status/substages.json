@@ -1,0 +1,20 @@
+[
+  {
+    "status": "Awaiting Final Approval",
+    "description": "Pending executive or finance confirmation.",
+    "score": 90,
+    "notes": ""
+  },
+  {
+    "status": "Start Delayed – Budget Release Scheduled",
+    "description": "Approved but awaiting next fiscal budget release.",
+    "score": 94,
+    "notes": ""
+  },
+  {
+    "status": "Approved – Awaiting Payment",
+    "description": "Approved and ready to proceed once payment clears.",
+    "score": 95,
+    "notes": ""
+  }
+]

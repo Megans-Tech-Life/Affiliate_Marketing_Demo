@@ -1,0 +1,14 @@
+[
+  {
+    "status": "Contract Under Review",
+    "description": "Legal or procurement teams reviewing the contract.",
+    "score": 85,
+    "notes": ""
+  },
+  {
+    "status": "Contract Adjustments Requested",
+    "description": "Requested edits or clarifications during review.",
+    "score": 87,
+    "notes": ""
+  }
+]

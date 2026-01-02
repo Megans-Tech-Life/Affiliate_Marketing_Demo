@@ -1,0 +1,32 @@
+[
+  {
+    "status": "Re-Engaged",
+    "description": "Lead resumed discussion after previous silence.",
+    "score": 45,
+    "notes": ""
+  },
+  {
+    "status": "Delayed Decision",
+    "description": "Lead requested more time to decide.",
+    "score": 42,
+    "notes": ""
+  },
+  {
+    "status": "Warm But Passive",
+    "description": "Lead remains positive but inactive.",
+    "score": 38,
+    "notes": ""
+  },
+  {
+    "status": "Strategic Pause",
+    "description": "Lead paused talks due to internal reasons.",
+    "score": 35,
+    "notes": ""
+  },
+  {
+    "status": "No Response",
+    "description": "Lead not responding despite follow-ups.",
+    "score": 40,
+    "notes": ""
+  }
+]

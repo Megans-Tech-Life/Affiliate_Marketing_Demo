@@ -1,0 +1,50 @@
+[
+  {
+    "status": "Internal Discussions Ongoing",
+    "description": "Lead is reviewing demo internally.",
+    "score": 58,
+    "notes": ""
+  },
+  {
+    "status": "Proposal Pending",
+    "description": "Lead requested proposal preparation.",
+    "score": 60,
+    "notes": ""
+  },
+  {
+    "status": "Budget Approval Pending",
+    "description": "Lead waiting for financial clearance.",
+    "score": 65,
+    "notes": ""
+  },
+  {
+    "status": "Re-Engaged",
+    "description": "Lead revived communication after demo.",
+    "score": 68,
+    "notes": ""
+  },
+  {
+    "status": "Strategic Pause",
+    "description": "Lead paused due to internal timelines.",
+    "score": 70,
+    "notes": ""
+  },
+  {
+    "status": "Lost to Competitor",
+    "description": "Lead selected a competitor solution.",
+    "score": 35,
+    "notes": ""
+  },
+  {
+    "status": "Not a Fit",
+    "description": "Solution deemed unsuitable for lead’s needs.",
+    "score": 30,
+    "notes": ""
+  },
+  {
+    "status": "No Response",
+    "description": "No reply after demo follow-up.",
+    "score": 55,
+    "notes": ""
+  }
+]

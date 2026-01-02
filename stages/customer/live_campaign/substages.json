@@ -1,0 +1,14 @@
+[
+  {
+    "status": "On Trial",
+    "description": "Campaign live during trial.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "On Free Plan",
+    "description": "Campaign live on free tier.",
+    "score": null,
+    "notes": ""
+  }
+]

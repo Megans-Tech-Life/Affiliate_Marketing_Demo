@@ -1,0 +1,38 @@
+[
+  {
+    "status": "No Activity After Launch",
+    "description": "Campaign launched successfully but shows no or minimal user activity.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "Feedback Pending",
+    "description": "Waiting on customer feedback after campaign launch.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "Performance Issues",
+    "description": "Campaign is underperforming; optimization discussions underway.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "Positive Feedback",
+    "description": "Customer shared positive campaign results and satisfaction.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "Successful Launch",
+    "description": "Campaign launch fully successful and performing as expected with customer satisfaction.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "Needs Additional Setup",
+    "description": "Additional workflows, configurations, or integrations required post-launch.",
+    "score": null,
+    "notes": ""
+  }
+]

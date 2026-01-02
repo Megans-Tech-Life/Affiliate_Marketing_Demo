@@ -1,0 +1,14 @@
+[
+  {
+    "status": "Churned / Downgraded",
+    "description": "Customer canceled or downgraded their paid plan.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "Account Inactive",
+    "description": "Customer account remains inactive for an extended period after cancellation.",
+    "score": null,
+    "notes": ""
+  }
+]

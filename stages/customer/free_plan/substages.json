@@ -1,0 +1,14 @@
+[
+  {
+    "status": "Low Usage",
+    "description": "Customer is on a free plan with minimal engagement or limited activity.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "High Usage",
+    "description": "Customer is highly active on the free plan but has not yet upgraded.",
+    "score": null,
+    "notes": ""
+  }
+]

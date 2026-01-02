@@ -1,0 +1,38 @@
+[
+  {
+    "status": "Reviewing Proposal",
+    "description": "Lead evaluating proposal internally.",
+    "score": 75,
+    "notes": ""
+  },
+  {
+    "status": "Seeking Internal Approval",
+    "description": "Proposal under management or finance review.",
+    "score": 78,
+    "notes": ""
+  },
+  {
+    "status": "Negotiation in Progress",
+    "description": "Discussing terms, pricing, or revisions.",
+    "score": 80,
+    "notes": ""
+  },
+  {
+    "status": "Decision – Moving Ahead",
+    "description": "Lead accepted proposal and plans to sign.",
+    "score": 90,
+    "notes": ""
+  },
+  {
+    "status": "Decision – Not Moving Forward",
+    "description": "Lead declined proposal after review.",
+    "score": 85,
+    "notes": ""
+  },
+  {
+    "status": "No Response",
+    "description": "Lead not responding after follow-ups.",
+    "score": 65,
+    "notes": ""
+  }
+]

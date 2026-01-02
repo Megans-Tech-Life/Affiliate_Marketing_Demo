@@ -1,0 +1,26 @@
+[
+  {
+    "status": "Signed Up – No Activity",
+    "description": "Customer registered but not yet active.",
+    "score": 96,
+    "notes": ""
+  },
+  {
+    "status": "Onboarding In Progress",
+    "description": "Onboarding activities underway.",
+    "score": 98,
+    "notes": ""
+  },
+  {
+    "status": "First Campaign Created",
+    "description": "Initial setup completed but campaign not launched.",
+    "score": 99,
+    "notes": ""
+  },
+  {
+    "status": "Onboarding Completed",
+    "description": "Customer fully onboarded and ready to operate.",
+    "score": 100,
+    "notes": ""
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "status": "Curious but Non-Committal",
+    "description": "Lead is curious and asking questions but hesitant to commit.",
+    "score": 35,
+    "notes": ""
+  },
+  {
+    "status": "Exploring Solutions",
+    "description": "Lead is comparing vendors and evaluating fit.",
+    "score": 42,
+    "notes": ""
+  },
+  {
+    "status": "Actively Evaluating",
+    "description": "Lead is actively assessing alignment, pricing, and integration.",
+    "score": 45,
+    "notes": ""
+  },
+  {
+    "status": "Disinterested / Not a Priority",
+    "description": "Lead responded but interest is low or timing not right.",
+    "score": 30,
+    "notes": ""
+  },
+  {
+    "status": "Start Delayed",
+    "description": "Lead interested but delayed due to timing or budget.",
+    "score": 33,
+    "notes": ""
+  }
+]

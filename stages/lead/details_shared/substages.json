@@ -1,0 +1,32 @@
+[
+  {
+    "status": "Awaiting Response",
+    "description": "Shared details with lead; waiting for reply.",
+    "score": 50,
+    "notes": ""
+  },
+  {
+    "status": "Reviewing Internally",
+    "description": "Lead is reviewing info with their team.",
+    "score": 54,
+    "notes": ""
+  },
+  {
+    "status": "Follow-Up Scheduled",
+    "description": "Next meeting or discussion booked.",
+    "score": 56,
+    "notes": ""
+  },
+  {
+    "status": "Demo Scheduled",
+    "description": "Demo arranged based on shared info.",
+    "score": 60,
+    "notes": ""
+  },
+  {
+    "status": "Start Delayed",
+    "description": "Lead postponed next step due to internal priorities.",
+    "score": 52,
+    "notes": ""
+  }
+]

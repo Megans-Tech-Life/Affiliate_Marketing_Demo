@@ -1,0 +1,20 @@
+[
+  {
+    "status": "Setup in Progress",
+    "description": "Payment received; campaign setup is underway.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "Paid Campaign – Active",
+    "description": "Paid campaign is live and performing normally.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "Underperforming / At Risk",
+    "description": "Campaign is live but showing weak results or early churn risk.",
+    "score": null,
+    "notes": ""
+  }
+]

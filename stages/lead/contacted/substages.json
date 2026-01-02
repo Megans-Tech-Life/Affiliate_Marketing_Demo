@@ -1,0 +1,32 @@
+[
+  {
+    "status": "No Meaningful Conversation",
+    "description": "Initial outreach made but lead did not engage or cut the call short.",
+    "score": 5,
+    "notes": ""
+  },
+  {
+    "status": "Deferred to Email",
+    "description": "Lead requested more details over email before continuing the discussion.",
+    "score": 8,
+    "notes": ""
+  },
+  {
+    "status": "Deferred to WhatsApp",
+    "description": "Lead asked to continue the conversation over WhatsApp instead.",
+    "score": 8,
+    "notes": ""
+  },
+  {
+    "status": "Deferred to Later – By Support",
+    "description": "Lead unavailable; support requested a follow-up at a later time.",
+    "score": 12,
+    "notes": ""
+  },
+  {
+    "status": "Deferred to Later – By Lead",
+    "description": "Lead asked to be contacted again after a specific date or time period.",
+    "score": 15,
+    "notes": ""
+  }
+]

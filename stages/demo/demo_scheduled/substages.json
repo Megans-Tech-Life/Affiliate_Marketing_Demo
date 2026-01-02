@@ -1,0 +1,32 @@
+[
+  {
+    "status": "Demo Scheduled",
+    "description": "Demo confirmed with date and time.",
+    "score": 55,
+    "notes": ""
+  },
+  {
+    "status": "Demo Completed",
+    "description": "Demo conducted successfully.",
+    "score": 60,
+    "notes": ""
+  },
+  {
+    "status": "Requested Customization",
+    "description": "Lead requested product customization details.",
+    "score": 59,
+    "notes": ""
+  },
+  {
+    "status": "Awaiting Response Post-Demo",
+    "description": "Waiting for lead feedback after demo.",
+    "score": 58,
+    "notes": ""
+  },
+  {
+    "status": "Demo Deferred",
+    "description": "Demo postponed or rescheduled.",
+    "score": 50,
+    "notes": ""
+  }
+]

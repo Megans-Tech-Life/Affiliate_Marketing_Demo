@@ -1,0 +1,20 @@
+[
+  {
+    "status": "Proposal Sent",
+    "description": "Proposal sent; awaiting response.",
+    "score": 70,
+    "notes": ""
+  },
+  {
+    "status": "Start Delayed – Internal Push",
+    "description": "Lead postponed proposal review internally.",
+    "score": 74,
+    "notes": ""
+  },
+  {
+    "status": "Start Delayed – Next Quarter",
+    "description": "Lead plans to move forward next quarter.",
+    "score": 72,
+    "notes": ""
+  }
+]

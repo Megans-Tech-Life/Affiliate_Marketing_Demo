@@ -1,0 +1,14 @@
+[
+  {
+    "status": "High Engagement",
+    "description": "Trial user is highly active and exploring multiple features.",
+    "score": null,
+    "notes": ""
+  },
+  {
+    "status": "Trial Ending – No Action Yet",
+    "description": "Trial nearing expiration; user has not taken action to upgrade or extend.",
+    "score": null,
+    "notes": ""
+  }
+]
