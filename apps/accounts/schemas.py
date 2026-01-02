@@ -57,11 +57,12 @@ class AccountBase(BaseModel):
         from_attributes = True
 
 # Create Schema (required fields enforced here)
-class AccountCreate(AccountBase):
+class AccountCreate(BaseModel):
     company_name: str
-    account_type: str
-    client_type: str
-    status: str
+    account_type: str = Field(default="customer")
+    client_type: str = Field(default="direct")
+    status: str = Field(default="active")
+
 
 # Update Schema (no required fields)
 class AccountUpdate(AccountBase):

@@ -1,16 +1,28 @@
 from click import UUID
 from sqlalchemy.orm import Session
 from fastapi import logger
+
+from apps.auth.models import User
 from .models import Account
 from .schemas import AccountCreate, AccountUpdate
 
 
 # Create a new Account
-def create_account(db: Session, account_data: AccountCreate, current_user):
-    data = account_data.model_dump(exclude_none=True)
-
+def create_account(db: Session, account_data: AccountCreate, current_user: User):
+    data = account_data.model_dump()
+    
+    # Set ownership fields
     data["owner_id"] = current_user.id
-    data["owner_name"] = getattr(current_user, "name", "Admin")
+    data["owner_name"] = getattr(current_user, "name", "User")
+    data["created_by"] = current_user.email
+
+    # Parent account safety
+    if not data.get("is_subsidiary"):
+        data["parent_account_id"] = None
+
+    # Convert empty strings to None
+    if data.get("parent_account_id") in ("", "string"):
+        data["parent_account_id"] = None
 
     new_account = Account(**data)
     db.add(new_account)
