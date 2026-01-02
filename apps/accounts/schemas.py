@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional, List
 import uuid
 from datetime import datetime, date
@@ -28,9 +28,9 @@ class AccountBase(BaseModel):
     instagram_url: Optional[str] = None
 
     # Classification
-    account_type: Optional[str] = None
-    client_type: Optional[str] = None
-    status: Optional[str] = None
+    account_type: str = Field(default="customer", description="Type of account")
+    client_type: str = Field(default="direct", description="Client relationship type")
+    status: str = Field(default="active", description="Current account status")
     priority: Optional[str] = None
     segment: Optional[str] = None
     territory: Optional[str] = None
@@ -40,12 +40,12 @@ class AccountBase(BaseModel):
     # Relationships
     owner_id: Optional[uuid.UUID] = None
     owner_name: Optional[str] = None
-    is_subsidiary: Optional[bool] = None
-    parent_account_id: Optional[uuid.UUID] = None
+    is_subsidiary: bool = False
+    parent_account_id: Optional[str] = None
 
     # Keep until confirmed
     created_by: Optional[str] = None
-    is_child_account: Optional[bool] = None
+    is_child_account: bool = False
 
     # Metrics
     last_activity_date: Optional[datetime] = None
