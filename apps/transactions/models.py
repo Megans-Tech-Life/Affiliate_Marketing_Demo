@@ -15,6 +15,7 @@ class CommissionRecord(Base):
     __tablename__ = "commission_records"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
+    created_by = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     salesperson_id = Column(UUID(as_uuid=True), ForeignKey("persons.id"), nullable=False)
     opportunity_id = Column(UUID(as_uuid=True), ForeignKey("opportunities.id"), nullable=True)
     amount = Column(Float, nullable=False)

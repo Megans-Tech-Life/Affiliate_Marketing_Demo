@@ -1,31 +1,44 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import func
-from fastapi import logger
+from apps.auth.models import User
 from . import models, schemas
+import logging
+from uuid import UUID
 
+logger = logging.getLogger(__name__)
 
-def create_commission(db: Session, commission_data: schemas.CommissionCreate):
-    new_commission = models.CommissionRecord(**commission_data.dict())
+def create_commission(
+    db: Session,
+    commission_data: schemas.CommissionCreate,
+    current_user: User,
+):
+    new_commission = models.CommissionRecord(
+        **commission_data.model_dump(),
+        created_by=current_user.id,
+    )
     db.add(new_commission)
     db.commit()
     db.refresh(new_commission)
     return new_commission
 
 
-def get_all_commissions(db: Session):
-    return db.query(models.CommissionRecord).all()
+
+def get_all_commissions(db: Session, current_user: User):
+    return db.query(models.CommissionRecord).filter(models.CommissionRecord.created_by == current_user.id).all()
 
 
-def get_commission_by_id(db: Session, commission_id):
-    return db.query(models.CommissionRecord).filter(models.CommissionRecord.id == commission_id).first()
+
+def get_commission_by_id(db: Session, commission_id, current_user: User):
+    return db.query(models.CommissionRecord).filter(models.CommissionRecord.id == commission_id,
+                                                    models.CommissionRecord.created_by == current_user.id).first()
 
 
-def update_commission(db: Session, commission_id, update_data: schemas.CommissionUpdate):
-    commission = get_commission_by_id(db, commission_id)
+def update_commission(db: Session, commission_id, update_data: schemas.CommissionUpdate, current_user: User):
+    commission = get_commission_by_id(db, commission_id, current_user)
     if not commission:
         return None
     
-    data = update_data.dict(exclude_unset=True)
+    data = update_data.model_dump(exclude_unset=True)
     unsupported_fields = []
     
     for key, value in data.items():
@@ -44,13 +57,22 @@ def update_commission(db: Session, commission_id, update_data: schemas.Commissio
     return commission
 
 
-def delete_commission(db: Session, commission_id):
-    commission = get_commission_by_id(db, commission_id)
-    if commission:
-        db.delete(commission)
-        db.commit()
-        return True
-    return False
+def delete_commission(db: Session, commission_id: UUID, current_user: User):
+    commission = (
+        db.query(models.CommissionRecord)
+        .filter(
+            models.CommissionRecord.id == commission_id,
+            models.CommissionRecord.created_by == current_user.id,
+        )
+        .first()
+    )
+
+    if not commission:
+        return False
+
+    db.delete(commission)
+    db.commit()
+    return True
 
 # Transaction Overview returns total commissions and breakdown by status for ALL salespersons
 def get_commission_overview(db: Session):
