@@ -65,7 +65,7 @@ class AccountCreate(BaseModel):
 
 
 # Update Schema (no required fields)
-class AccountUpdate(AccountBase):
+class AccountUpdate(BaseModel):
     pass
 
 # Response Schema

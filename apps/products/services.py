@@ -1,7 +1,10 @@
+from uuid import UUID
 from sqlalchemy.orm import Session
-from fastapi import logger
 from . import models, schemas
 from apps.contacts.models import PersonOfContact
+import logging
+
+logger = logging.getLogger(__name__)
 
 def create_product(db: Session, product: schemas.ProductCreate):
     db_product = models.Product(
@@ -23,10 +26,10 @@ def create_product(db: Session, product: schemas.ProductCreate):
 def get_all_products(db: Session):
     return db.query(models.Product).filter(models.Product.is_deleted == False).all()
 
-def get_product(db: Session, product_id: str):
+def get_product(db: Session, product_id: UUID):
     return db.query(models.Product).filter(models.Product.id == product_id).first()
 
-def update_product(db: Session, product_id: str, product_data: schemas.ProductUpdate):
+def update_product(db: Session, product_id: UUID, product_data: schemas.ProductUpdate):
     db_product = db.query(models.Product).filter(models.Product.id == product_id).first()
     if not db_product:
         return None
@@ -49,7 +52,7 @@ def update_product(db: Session, product_id: str, product_data: schemas.ProductUp
     db.refresh(db_product)
     return db_product
 
-def soft_delete_product(db: Session, product_id: str):
+def soft_delete_product(db: Session, product_id: UUID):
     product = db.query(models.Product).filter(models.Product.id == product_id).first()
     if product:
         product.is_deleted = True
@@ -60,7 +63,7 @@ def soft_delete_product(db: Session, product_id: str):
 def get_deleted_products(db: Session):
     return db.query(models.Product).filter(models.Product.is_deleted == True).all()
 
-def restore_product(db: Session, product_id: str):
+def restore_product(db: Session, product_id: UUID):
     product = db.query(models.Product).filter(models.Product.id == product_id).first()
     if product:
         product.is_deleted = False

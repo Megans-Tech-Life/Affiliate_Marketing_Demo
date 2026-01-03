@@ -1,21 +1,25 @@
 from sqlalchemy.orm import Session
-from fastapi import HTTPException, logger
+from fastapi import HTTPException
 from . import models, schemas
 from apps.leads.models import Lead
 from apps.products.models import Product
+from apps.auth.models import User
 from apps.opportunities.models import Opportunity
 from .models import PersonOfContact
+import logging
 
+logger = logging.getLogger(__name__)
 
 # Create a new Person of Contact
-def create_poc(db: Session, poc_data: schemas.POCCreate):
+def create_poc(db: Session, poc_data: schemas.POCCreate, current_user: User):
     db_poc = models.PersonOfContact(
         role=poc_data.role,
         personality_type=poc_data.personality_type,
         is_deleted=poc_data.is_deleted or False,
+        user_id=current_user.id,
     )
 
-# Attach relationships if provided
+    # Attach relationships if provided
     if poc_data.leads_ids:
         db_poc.leads = db.query(Lead).filter(Lead.id.in_(poc_data.leads_ids)).all()
 
@@ -25,7 +29,7 @@ def create_poc(db: Session, poc_data: schemas.POCCreate):
     if poc_data.opportunities_ids:
         db_poc.opportunities = db.query(Opportunity).filter(Opportunity.id.in_(poc_data.opportunities_ids)).all()
 
-# Save to DB
+    # Save to DB
     db.add(db_poc)
     db.commit()
     db.refresh(db_poc)

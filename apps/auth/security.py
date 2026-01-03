@@ -50,16 +50,19 @@ def decode_access_token(token: str):
         raise HTTPException(status_code=401, detail="Invalid token")
 
 # Swagger-friendly Bearer auth
-bearer_scheme = HTTPBearer()
+bearer_scheme = HTTPBearer(auto_error=False)
 
 
 def get_current_user(
-    credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
+    credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
     db: Session = Depends(get_db),
 ):
-    token = credentials.credentials  # <-- raw JWT
+    if credentials is None:
+        raise HTTPException(status_code=401, detail="Not authenticated")
 
+    token = credentials.credentials 
     payload = decode_access_token(token)
+    
     user_id: str | None = payload.get("sub")
 
     if not user_id:

@@ -1,5 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Security
 from sqlalchemy.orm import Session
+from apps.admin import models
+from apps.auth.models import User
+from apps.auth.security import get_current_user
 from core.database import get_db
 from . import schemas, services
 
@@ -7,8 +10,10 @@ router = APIRouter(prefix="/contacts", tags=["Contacts"])
 
 # Create a new contact
 @router.post("/", response_model=schemas.POCResponse)
-def create_poc(poc: schemas.POCCreate, db: Session = Depends(get_db)):
-    return services.create_poc(db, poc)
+def create_poc(poc: schemas.POCCreate, 
+               db: Session = Depends(get_db), 
+               current_user: User = Security(get_current_user)):
+    return services.create_poc(db, poc, current_user)
 
 # Get all contacts (active)
 @router.get("/", response_model=list[schemas.POCResponse])
