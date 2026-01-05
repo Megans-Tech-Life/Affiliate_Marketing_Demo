@@ -7,7 +7,7 @@ from core.database import get_db
 from . import services, schemas, models
 from apps.auth.security import get_current_user
 
-router = APIRouter(prefix="/interactions", tags=["interactions"])
+router = APIRouter(prefix="/interactions", tags=["Interactions"])
 
 # Create Interaction
 @router.post("/", response_model=schemas.InteractionResponse, status_code=status.HTTP_201_CREATED)

@@ -62,10 +62,15 @@ def credit_commission(db: Session, person_id: UUID, data: CommissionCredit) -> W
         .first()
     )
     if not wallet:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Wallet does not exist for this person.",
+        wallet = Wallet(
+            person_id=person_id,
+            available_balance=Decimal("0.00"),
+            lifetime_earnings=Decimal("0.00"),
+            created_at=datetime.now(timezone.utc),
+            updated_at=datetime.now(timezone.utc),
         )
+        db.add(wallet)
+        db.flush() # Ensures wallet.id exists for transaction logging
 
     amount = Decimal(str(data.amount))
 

@@ -18,10 +18,11 @@ def create_interaction(
     if isinstance(data.get("type"), Enum):
         data["type"] = data["type"].value
 
+    data["occurred_at"] = data.get("occurred_at", datetime.now(timezone.utc))
+
     new_interaction = models.Interaction(
         **data,
         created_by=created_by,
-        occurred_at=data.get("occurred_at") or datetime.now(timezone.utc),
         created_at=datetime.now(timezone.utc),
         updated_at=datetime.now(timezone.utc)
     )
@@ -30,8 +31,8 @@ def create_interaction(
     # Update last_contact_at on Lead
     if new_interaction.lead_id:
         lead = (
-            db.query(models.Lead)
-            .filter(models.Lead.id == new_interaction.lead_id)
+            db.query(Lead)
+            .filter(Lead.id == new_interaction.lead_id)
             .first()
         )
         if lead:

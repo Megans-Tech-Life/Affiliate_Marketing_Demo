@@ -11,13 +11,21 @@ def normalize_shop_domain(shop: str) -> str:
         return shop
     return shop.strip().lower()
 
-# Validate external e-commerce domain format
+# Demo safe shop domain validation
 def validate_shop_domain(shop: str) -> bool:
     if not shop:
         return False
 
-    pattern = r"^[a-z0-9-]+\.(example|store|shop)\.com$"
-    return re.match(pattern, shop.lower()) is not None
+    # Must look like a domain, not a full URL
+    if shop.startswith(("http://", "https://")):
+        return False
+
+    # Must contain at least one dot
+    if "." not in shop:
+        return False
+
+    # Basic length sanity check
+    return len(shop) >= 5
 
 # Email sending stub
 def send_email(to: str, subject: str, body: str) -> None:

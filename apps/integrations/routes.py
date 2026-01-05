@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/integrations", tags=["Integrations"])
 
+# Generate Affiliate Link for Current User
 @router.get("/link", response_model=AffiliateLinkOut)
 def generate_affiliate_link(current_user: User = Depends(get_current_user)):
     affiliate_id = current_user.id
@@ -32,6 +33,7 @@ def generate_affiliate_link(current_user: User = Depends(get_current_user)):
         tracking_url=tracking_url
     )
 
+# Redirect Affiliate to shop with click tracking
 @router.get("/redirect")
 def affiliate_redirect(
     utm_source: UUID,
