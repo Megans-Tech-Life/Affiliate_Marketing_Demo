@@ -7,7 +7,7 @@ from uuid import UUID
 from core.database import get_db
 from apps.auth.models import User
 from apps.auth.security import get_current_user
-from .models import AffiliateClick
+from .models import AffiliateClick, AffiliateLink
 from .services import record_click
 from .schemas import AffiliateLinkOut
 from .utils import normalize_shop_domain, validate_shop_domain
@@ -19,16 +19,36 @@ router = APIRouter(prefix="/integrations", tags=["Integrations"])
 
 # Generate Affiliate Link for Current User
 @router.get("/link", response_model=AffiliateLinkOut)
-def generate_affiliate_link(current_user: User = Depends(get_current_user)):
+def generate_affiliate_link(
+    db: Session = Depends(get_db), 
+    current_user: User = Depends(get_current_user)):
+    
     affiliate_id = current_user.id
     logger.info(f"Generating affiliate link for affiliate_id={affiliate_id}")
+    
+    affiliate_link = (
+        db.query(AffiliateLink)
+        .filter(AffiliateLink.affiliate_user_id == affiliate_id)
+        .first()
+    )
+
+    if not affiliate_link:
+        affiliate_link = AffiliateLink(
+            affiliate_user_id=affiliate_id,
+            created_at=datetime.now(timezone.utc)
+        )
+    
+        db.add(affiliate_link)
+        db.commit()
+        db.refresh(affiliate_link)
 
     tracking_url = (
         f"https://yourdomain.com/integrations/redirect"
-        f"?utm_source={affiliate_id}"
+        f"?utm_source={affiliate_link.id}"
     )
 
     return AffiliateLinkOut(
+        affiliate_link_id=affiliate_link.id,
         affiliate_user_id=affiliate_id,
         tracking_url=tracking_url
     )

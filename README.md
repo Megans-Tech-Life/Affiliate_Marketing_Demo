@@ -2,13 +2,14 @@
 
 ## Overview
 
-This project is a **demo backend API** showcasing the design and implementation of a modular, production-style CRM system built with FastAPI.  
-It demonstrates real-world SaaS backend patterns such as authentication, lead lifecycle management, configurable sales pipelines, third-party integrations, and transactional tracking.
+This project is a **demo backend API** showcasing the design and implementation of a modular, production-style CRM and affiliate tracking system built with **FastAPI**.
+
+It demonstrates real-world SaaS backend patterns including authentication, lead lifecycle management, configurable sales pipelines, affiliate attribution, third-party integrations, transactional tracking, and webhook-safe callbacks.
 
 > ⚠️ **Disclaimer**  
 > This repository is a **portfolio/demo project**.  
 > It does **not** contain proprietary business logic, client data, secrets, or internal systems from any employer.  
-> The architecture is inspired by real-world SaaS systems but has been generalized for public demonstration.
+> The architecture is inspired by real-world SaaS platforms but has been generalized for public demonstration.
 
 ---
 
@@ -17,6 +18,8 @@ It demonstrates real-world SaaS backend patterns such as authentication, lead li
 - Register new users: `POST /auth/register`
 - Login existing users: `POST /auth/login`
 - Retrieve current user info: `GET /auth/me` (JWT required)
+
+JWT-based authentication is used across protected endpoints, with role-aware access for admin-only operations.
 
 ---
 
@@ -28,51 +31,83 @@ It demonstrates real-world SaaS backend patterns such as authentication, lead li
 - **Update** a lead: `PUT /leads/{lead_id}`
 - **Soft delete** a lead: `DELETE /leads/{lead_id}`
 
+All lead queries are scoped to the authenticated user to ensure proper data isolation.
+
 ---
 
 ## CRM Pipeline Structure
 
-The sales pipeline is defined using stage-based configuration files to allow flexible, data-driven workflows.
+The sales pipeline is defined using **stage-based configuration files**, enabling flexible, data-driven workflows.
 
-- **Stages**: `new_account`, `lead`, `demo`, `proposal`, `contract`, `approval`, `customer`, `closed`
-- Each stage contains a `substages.json` file defining:
+- **Stages** include:  
+  `new_account`, `lead`, `demo`, `proposal`, `contract`, `approval`, `customer`, `closed`
+- Each stage contains a `substages.json` configuration defining:
   - status
   - description
   - score
   - notes
 
-This approach allows pipeline behavior and scoring logic to be modified without changing application code.
+This approach allows pipeline behavior and scoring logic to be modified **without changing application code**.
+
+---
+
+## Affiliate & Conversion Flow (Demo Highlight)
+
+This project includes a **complete demo affiliate lifecycle**, modeled after real SaaS attribution systems.
+
+### Implemented Flow
+
+Affiliate Link → Redirect Tracking → Install Callback → Lead Attribution → Commission Wallet
+
+### Key Concepts
+
+- Affiliate links are generated per user and expose a stable `affiliate_link_id`
+- Redirects track clicks and optionally associate merchant/shop metadata
+- Install callbacks:
+  - Resolve or create leads
+  - Persist affiliate attribution idempotently
+- Wallets track commission credits and lifetime earnings
+- Derived values (e.g. tracking URLs) are generated dynamically rather than stored
+
+### Conversion Callback
+
+A conversion callback endpoint is wired and intentionally implemented as a **safe no-op**:
+
+- Accepts requests
+- Returns `200 OK`
+- Does not yet persist purchase or revenue data
+
+This reflects a realistic phased rollout where conversion logic is implemented after install attribution is validated.
 
 ---
 
 ## Integrations Module
 
-Demonstrates handling of third-party integration workflows using generic, vendor-neutral patterns.
+Demonstrates vendor-neutral third-party integration patterns:
 
-- External event ingestion via webhooks
-- Attribution and linkage to leads and accounts
-- Validation and normalization of external identifiers
+- External webhook ingestion
+- Identifier normalization and validation
+- Attribution to internal entities
+- Safe, idempotent processing
 
 ---
 
-## Transactions Module
+## Transactions & Wallets
 
-Demonstrates transactional record tracking associated with opportunities and users.
-
-- Create, update, and soft-delete transaction records
-- Example calculation logic for transactional values
-- Aggregated summaries for reporting and analysis
+- Commission credits tracked per person
+- Wallets auto-create on first commission
+- Transaction history retained for auditability
+- Aggregated balances maintained for reporting
 
 ---
 
 ## Performance Tracking
 
-Analyzes user and system performance across the CRM lifecycle.
+Demonstrates extensible analytics patterns:
 
-- Aggregates leads, opportunities, and transactions
-- Produces summary metrics per user
-- Demonstrates extensible analytics patterns
-- Includes optional compatibility scoring between contacts and users (demo-only logic)
+- Aggregation of leads, opportunities, and transactions
+- User-level performance summaries
+- Demo-only compatibility scoring logic
 
 ---
 
@@ -90,35 +125,27 @@ Analyzes user and system performance across the CRM lifecycle.
 
 ## Getting Started
 
-1. Clone the repository
-2. Create and activate a virtual environment
-3. Install dependencies:
-   bash
-   `pip install -r requirements.txt`
-4. Create a .env file with your database configuration (PostgreSQL):
-   env
-   `DATABASE_URL=postgresql+psycopg2://user:password@localhost:5432/demo_crm`
-5. Run database migrations (optional for demo):
-   bash
-   `alembic upgrade head`
-6. Start the API:
-   bash
-   `python -m uvicorn main:app --reload`
-7. Open API docs at:
-   http://127.0.0.1:8000/docs
+```bash
+# Clone the repository
+git clone <repo-url>
 
-## Purpose
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-This project is intended to demonstrate backend engineering skills including:
+# Install dependencies
+pip install -r requirements.txt
 
-API design and routing
+# Configure environment
+DATABASE_URL=postgresql+psycopg2://user:password@localhost:5432/demo_crm
 
-Authentication and authorization
+# Run migrations
+alembic upgrade head
 
-Modular service architecture
+# Start the API
+python -m uvicorn main:app --reload
 
-Database modeling and migrations
+# Swagger UI available at:
+http://127.0.0.1:8000/docs
 
-Config-driven business workflows
-
-Clean separation of concerns
+```

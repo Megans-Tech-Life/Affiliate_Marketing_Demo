@@ -31,8 +31,6 @@ class AffiliateLink(Base):
         UUID(as_uuid=True), ForeignKey("users.id"), nullable=False, index=True
     )
 
-    tracking_url = Column(String(512), nullable=False, unique=True, index=True)
-
     created_at = Column(
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc)

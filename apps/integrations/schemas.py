@@ -56,6 +56,7 @@ class AffiliateConversionOut(BaseModel):
    affiliate_user_id: Optional[UUID] = None
 
 class AffiliateLinkOut(BaseModel):
+    affiliate_link_id: UUID
     affiliate_user_id: UUID
     tracking_url: str
 
